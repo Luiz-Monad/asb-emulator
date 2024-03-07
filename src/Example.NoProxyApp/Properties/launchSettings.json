@@ -1,9 +1,8 @@
 {
   "profiles": {
-    "ServiceBusEmulator.Host": {
+    "Example.NoProxyApp": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
-      "workingDirectory": "./bin/Debug/net7.0",
+      "workingDirectory": "./bin/Debug/net6.0",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       }

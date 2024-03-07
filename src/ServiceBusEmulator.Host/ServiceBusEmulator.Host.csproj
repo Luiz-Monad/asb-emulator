@@ -12,6 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="../../server-cert/testca/cert.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ServiceBusEmulator.RabbitMq\ServiceBusEmulator.RabbitMq.csproj" />
     <ProjectReference Include="..\ServiceBusEmulator\ServiceBusEmulator.csproj" />
   </ItemGroup>

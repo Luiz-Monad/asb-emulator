@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Example.NoProxyApp.Patches;
+using HarmonyLib;
 
 namespace Example.NoProxyApp
 {
@@ -9,6 +10,11 @@ namespace Example.NoProxyApp
         public void Patch()
         {
             _harmony.PatchAll();
+        }
+
+        public void PatchCertOnly()
+        {
+            _harmony.CreateClassProcessor(typeof(AmqpTransportInitiatorPatch)).Patch();
         }
     }
 }

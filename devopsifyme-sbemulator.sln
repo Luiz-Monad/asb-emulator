@@ -25,6 +25,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D74CA77C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceBusEmulator.IntegrationTests", "test\ServiceBusEmulator.IntegrationTests\ServiceBusEmulator.IntegrationTests.csproj", "{A5BCE744-966D-44A1-9B08-359572A46094}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{D955C9ED-68F5-4DF5-AD01-C41888DFFBF6}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.amqp1.yml = docker-compose.amqp1.yml
+		docker-compose.integration.yml = docker-compose.integration.yml
+		docker-compose.yml = docker-compose.yml
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{D286D3E6-B1FD-41D2-A5E9-8D95A3FCE503}"
+	ProjectSection(SolutionItems) = preProject
+		docs\configuration.md = docs\configuration.md
+		docs\example-azure-function.gif = docs\example-azure-function.gif
+		docs\examples.md = docs\examples.md
+		docs\install-docker.md = docs\install-docker.md
+		docs\install-package.md = docs\install-package.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Certs", "Certs", "{7CEED451-BA37-49B4-BC6F-4976D81F0AA3}"
+	ProjectSection(SolutionItems) = preProject
+		server-cert\testca\cacert.cer = server-cert\testca\cacert.cer
+		server-cert\testca\cert.pem = server-cert\testca\cert.pem
+		server-cert\testca\cert.pfx = server-cert\testca\cert.pfx
+		server-cert\extract.ps1 = server-cert\extract.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +118,8 @@ Global
 		{EBAFCEAF-61E3-451C-8BC8-22CB327CF615} = {A4C29A23-10FA-4C4D-AE34-EE7F08B0A1EE}
 		{EA3D210B-D9A9-4A42-B6EB-8F5CE728892B} = {D74CA77C-30B1-4F81-B454-5FEBD3362D85}
 		{A5BCE744-966D-44A1-9B08-359572A46094} = {D74CA77C-30B1-4F81-B454-5FEBD3362D85}
+		{D286D3E6-B1FD-41D2-A5E9-8D95A3FCE503} = {D955C9ED-68F5-4DF5-AD01-C41888DFFBF6}
+		{7CEED451-BA37-49B4-BC6F-4976D81F0AA3} = {D955C9ED-68F5-4DF5-AD01-C41888DFFBF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7DF07FB9-7A6A-4EB0-87D7-3ACAD5C3A0C3}
