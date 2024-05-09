@@ -51,6 +51,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Certs", "Certs", "{7CEED451
 		server-cert\extract.ps1 = server-cert\extract.ps1
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{E9E79A08-3E53-48F0-9E0E-9DB7E330EF46}"
+	ProjectSection(SolutionItems) = preProject
+		docker\rabbitmq-amqp1\Dockerfile = docker\rabbitmq-amqp1\Dockerfile
+		docker\rabbitmq-amqp1\openssl.cnf = docker\rabbitmq-amqp1\openssl.cnf
+		docker\rabbitmq-amqp1\prepare-server.sh = docker\rabbitmq-amqp1\prepare-server.sh
+		docker\rabbitmq-amqp1\rabbitmq.conf = docker\rabbitmq-amqp1\rabbitmq.conf
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,6 +128,7 @@ Global
 		{A5BCE744-966D-44A1-9B08-359572A46094} = {D74CA77C-30B1-4F81-B454-5FEBD3362D85}
 		{D286D3E6-B1FD-41D2-A5E9-8D95A3FCE503} = {D955C9ED-68F5-4DF5-AD01-C41888DFFBF6}
 		{7CEED451-BA37-49B4-BC6F-4976D81F0AA3} = {D955C9ED-68F5-4DF5-AD01-C41888DFFBF6}
+		{E9E79A08-3E53-48F0-9E0E-9DB7E330EF46} = {D955C9ED-68F5-4DF5-AD01-C41888DFFBF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7DF07FB9-7A6A-4EB0-87D7-3ACAD5C3A0C3}

@@ -6,7 +6,8 @@ var testQueueName = "testQueue";
 var client = new BusClient();
 
 Console.WriteLine("Patching...");
-patchSetup.Patch();
+//patchSetup.Patch();
+patchSetup.PatchCertOnly();
 
 Console.WriteLine("Sending Message...");
 await client.SendMessageAsync(testQueueName);
