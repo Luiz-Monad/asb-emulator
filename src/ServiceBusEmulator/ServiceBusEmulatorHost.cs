@@ -100,7 +100,7 @@ namespace ServiceBusEmulator
                 return errors == SslPolicyErrors.RemoteCertificateNotAvailable;
             };
 
-            _logger.LogDebug($"Starting secure service bus host at {address}.");
+            _logger.LogInformation($"Starting secure service bus host at {address.Scheme}://{address.Host}:{address.Port}.");
 
             return host;
         }
