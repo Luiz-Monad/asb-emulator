@@ -7,7 +7,7 @@ using System;
 
 namespace ServiceBusEmulator.Security
 {
-    public class CbsRequestProcessor : IRequestProcessor
+    public class CbsRequestProcessor
     {
         private readonly ISecurityContext _messageContext;
         private readonly ILogger _logger;
@@ -22,28 +22,28 @@ namespace ServiceBusEmulator.Security
             _tokenValidator = tokenValidator;
         }
 
-        public void Process(RequestContext requestContext)
+        public void Process(Message message, ListenerLink reqLink, ListenerLink respLink, Action<Message> complete)
         {
-            if (ValidateCbsRequest(requestContext))
+            if (ValidateCbsRequest(message))
             {
-                _messageContext.Authorize(requestContext.Link.Session.Connection);
-                using Message message = GetResponseMessage(200, requestContext);
-                requestContext.Complete(message);
+                _messageContext.Authorize(reqLink.Session.Connection);
+                using Message response = GetResponseMessage(200, message);
+                complete(response);
             }
             else
             {
-                using (Message message = GetResponseMessage(401, requestContext))
+                using (Message response = GetResponseMessage(401, message))
                 {
-                    requestContext.Complete(message);
+                    complete(response);
                 }
-                requestContext.ResponseLink.Close();
-                requestContext.ResponseLink.AddClosedCallback((sender, _) => ((Link)sender).Session.Connection.CloseAsync());
+                respLink.Close();
+                respLink.AddClosedCallback((sender, _) => ((Link)sender).Session.Connection.CloseAsync());
             }
         }
 
-        private bool ValidateCbsRequest(RequestContext requestContext)
+        private bool ValidateCbsRequest(Message message)
         {
-            string token = (string)requestContext.Message.Body;
+            string token = (string)message.Body;
             try
             {
                 _tokenValidator.Validate(token);
@@ -57,19 +57,19 @@ namespace ServiceBusEmulator.Security
             }
         }
 
-        private static Message GetResponseMessage(int responseCode, RequestContext requestContext)
+        private static Message GetResponseMessage(int responseCode, Message message)
         {
-            return new Message
+            // python SDK $cbs authentication uses integer message IDs.
+            Message response = new Message
             {
-                Properties = new Properties
-                {
-                    CorrelationId = requestContext.Message.Properties.MessageId
-                },
+                Properties = new Properties(),
                 ApplicationProperties = new ApplicationProperties
                 {
                     ["status-code"] = responseCode
                 }
             };
+            response.Properties.SetCorrelationId(message.Properties.GetMessageId());
+            return response;
         }
     }
 }

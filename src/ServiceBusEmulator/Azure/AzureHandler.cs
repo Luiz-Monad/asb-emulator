@@ -1,5 +1,9 @@
-﻿using Amqp.Framing;
+﻿using Amqp;
+using Amqp.Framing;
 using Amqp.Handler;
+using Amqp.Listener;
+using Amqp.Types;
+using ServiceBusEmulator.Security;
 using System;
 
 namespace ServiceBusEmulator.Azure
@@ -12,19 +16,36 @@ namespace ServiceBusEmulator.Azure
 
         public bool CanHandle(EventId id)
         {
-            return id is EventId.SendDelivery or EventId.LinkLocalOpen;
+            return id switch {
+                EventId.SendDelivery => true,
+                EventId.LinkLocalOpen => true,
+                EventId.ConnectionLocalOpen => true,
+                EventId.SessionLocalOpen => true,
+                _ => false,
+            };
         }
 
         public void Handle(Event protocolEvent)
         {
-            if (protocolEvent.Id == EventId.SendDelivery && protocolEvent.Context is IDelivery delivery)
+            if (protocolEvent.Id == EventId.SendDelivery && protocolEvent.Context is IDelivery send)
             {
-                delivery.Tag = Guid.NewGuid().ToByteArray();
+                send.Tag = Guid.NewGuid().ToByteArray();
             }
 
             if (protocolEvent.Id == EventId.LinkLocalOpen && protocolEvent.Context is Attach attach)
             {
                 attach.MaxMessageSize = int.MaxValue;
+                attach.Properties = new Fields();
+            }
+
+            if (protocolEvent.Id == EventId.SessionLocalOpen && protocolEvent.Context is Begin begin)
+            {
+                begin.Properties = new Fields();
+            }
+
+            if (protocolEvent.Id == EventId.ConnectionLocalOpen && protocolEvent.Context is Open open)
+            {
+                open.Properties = new Fields();
             }
         }
     }

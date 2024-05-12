@@ -24,6 +24,7 @@ namespace ServiceBusEmulator
             _ = services.AddTransient<ISecurityContext>(sp => SecurityContext.Default);
 
             _ = services.AddTransient<CbsRequestProcessor>();
+            _ = services.AddTransient<CbsMessageLinkProcessor>();
             _ = services.AddTransient<ITokenValidator>(sp => CbsTokenValidator.Default);
 
             _ = services.AddOptions<ServiceBusEmulatorOptions>().Configure(configure).PostConfigure(options =>

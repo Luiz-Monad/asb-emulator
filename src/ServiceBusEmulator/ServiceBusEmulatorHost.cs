@@ -18,17 +18,20 @@ namespace ServiceBusEmulator
         private ContainerHost _containerHost;
         private readonly ILinkProcessor _linkProcessor;
         private readonly CbsRequestProcessor _cbsRequestProcessor;
+        private readonly CbsMessageLinkProcessor _cbsMessageLinkProcessor;
         private readonly ILogger _logger;
 
         public ServiceBusEmulatorOptions Settings { get; }
 
-        public ServiceBusEmulatorHost(ILinkProcessor linkProcessor, CbsRequestProcessor cbsRequestProcessor, IOptions<ServiceBusEmulatorOptions> options, ILogger<ServiceBusEmulatorHost> logger)
+        public ServiceBusEmulatorHost(ILinkProcessor linkProcessor, CbsRequestProcessor cbsRequestProcessor, CbsMessageLinkProcessor cbsMessageLinkProcessor, 
+            IOptions<ServiceBusEmulatorOptions> options, ILogger<ServiceBusEmulatorHost> logger)
         {
             ServiceBusEmulatorOptions o = options.Value;
             Settings = o;
 
             _linkProcessor = linkProcessor;
             _cbsRequestProcessor = cbsRequestProcessor;
+            _cbsMessageLinkProcessor = cbsMessageLinkProcessor;
             _logger = logger;
         }
 
@@ -77,8 +80,8 @@ namespace ServiceBusEmulator
         {
             return Task.Run(() =>
                        {
-                           host.RegisterRequestProcessor("$cbs", _cbsRequestProcessor);
-                           host.RegisterLinkProcessor(_linkProcessor);
+                           _cbsMessageLinkProcessor.RegisterPreviousLinkProcessor(_linkProcessor);
+                           host.RegisterLinkProcessor(_cbsMessageLinkProcessor);
                            host.Open();
                        });
         }
