@@ -10,6 +10,10 @@ namespace ServiceBusEmulator.RabbitMq
             {
                 address = address[1..];
             }
+            if (address.StartsWith("amqps://"))
+            {
+                address = address.Split('/', 4)[3];
+            }
 
             string[] parts = address.Split('/');
             string exchangeName = parts[0];

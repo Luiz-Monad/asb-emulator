@@ -7,11 +7,16 @@ namespace ServiceBusEmulator.RabbitMq.Tests
     public class RabbitMqUtilitiesTest : Base<RabbitMqUtilities>
     {
         [Theory]
-       [InlineData("dummyQueue", "dummyQueue", "dummyQueue", "dummyQueue")]
+        [InlineData("dummyQueue", "dummyQueue", "dummyQueue", "dummyQueue")]
         [InlineData("dummyQueue/$deadletterqueue", "dummyQueue", "dummyQueue-dlq", "dummyQueue-dlq")]
         [InlineData("topicName", "topicName", "topicName", "topicName")]
         [InlineData("topicName/Subscriptions/subName", "topicName", "topicName", "topicName-sub-subName")]
         [InlineData("topicName/Subscriptions/subName/$deadletterqueue", "topicName", "topicName-sub-subName-dlq", "topicName-sub-subName-dlq")]
+        [InlineData("amqps://localhost/dummyQueue", "dummyQueue", "dummyQueue", "dummyQueue")]
+        [InlineData("amqps://localhost/dummyQueue/$deadletterqueue", "dummyQueue", "dummyQueue-dlq", "dummyQueue-dlq")]
+        [InlineData("amqps://localhost/topicName", "topicName", "topicName", "topicName")]
+        [InlineData("amqps://localhost/topicName/Subscriptions/subName", "topicName", "topicName", "topicName-sub-subName")]
+        [InlineData("amqps://localhost/topicName/Subscriptions/subName/$deadletterqueue", "topicName", "topicName-sub-subName-dlq", "topicName-sub-subName-dlq")]
         public void ThatAddressIsTranslated(string address, string expectedExchange, string expectedRoutingKey, string expectedQueue)
         {
             (string exchange, string queue, string routingKey) = Sut.GetExachangeAndQueueNames(address);
