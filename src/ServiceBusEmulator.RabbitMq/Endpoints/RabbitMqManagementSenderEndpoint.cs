@@ -58,14 +58,14 @@ namespace ServiceBusEmulator.RabbitMq.Endpoints
             response.ApplicationProperties[ManagementConstants.Response.StatusDescription] = status.ToString();
 
             response.Properties ??= new Properties();
-            response.Properties.CorrelationId = request.Properties.MessageId;
+            response.Properties.SetCorrelationId(request.Properties.GetMessageId());
 
             return response;
         }
 
         public override void OnFlow(FlowContext flowContext)
         {
-            throw new NotImplementedException();
+            // rabbitmq doesn't support flow control on AMQP either way
         }
 
         public override void OnDisposition(DispositionContext dispositionContext)

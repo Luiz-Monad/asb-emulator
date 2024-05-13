@@ -47,7 +47,7 @@ namespace ServiceBusEmulator.RabbitMq.Endpoints
 
         public override void OnFlow(FlowContext flowContext)
         {
-            throw new NotImplementedException();
+            // rabbitmq doesn't support flow control on AMQP either way
         }
 
         public override void OnMessage(MessageContext messageContext)

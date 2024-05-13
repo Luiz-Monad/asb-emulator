@@ -56,8 +56,7 @@ namespace ServiceBusEmulator.Security
                 throw new ArgumentException(null, nameof(token));
             }
 
-            System.Collections.Generic.Dictionary<string, string> query = token
-[SasFullName.Length..]
+            System.Collections.Generic.Dictionary<string, string> query = token[SasFullName.Length..]
                 .Split(new[] { SasPairSeparator }, StringSplitOptions.None)
                 .Select(pair => pair.Split(new[] { SasKeyValueSeparator }, 2, StringSplitOptions.None))
                 .ToDictionary(pair => pair[0], pair => pair.Length > 1 ? pair[1] : null);
