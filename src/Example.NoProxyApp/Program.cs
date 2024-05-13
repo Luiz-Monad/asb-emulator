@@ -1,11 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Example.NoProxyApp;
+using Example.NoProxyApp.Patches;
 
 var patchSetup = new PatchSetup();
 var testQueueName = "testQueue";
 var client = new BusClient();
 
 Console.WriteLine("Patching...");
+AmqpTransportInitiatorPatch.RootCertificatePath = Settings.RootCertificatePath;
 //patchSetup.Patch();
 patchSetup.PatchCertOnly();
 

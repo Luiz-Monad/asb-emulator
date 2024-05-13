@@ -2,7 +2,7 @@
   "profiles": {
     "Example.NoProxyApp": {
       "commandName": "Project",
-      "workingDirectory": "./bin/Debug/net6.0",
+      "workingDirectory": "./bin/Debug/net7.0",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       }

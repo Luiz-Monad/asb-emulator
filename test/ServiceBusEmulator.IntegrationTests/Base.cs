@@ -9,14 +9,15 @@ namespace ServiceBusEmulator.IntegrationTests
 
         public Base()
         {
-            var clientOptions = new ServiceBusClientOptions
-            {
+            var clientOptions = new ServiceBusClientOptions {
                 TransportType = ServiceBusTransportType.AmqpTcp
             };
 
             Client = new ServiceBusClient(ConnectionString, clientOptions);
 
             Fixture = new Fixture();
+
+            Patch.Run();
         }
 
         protected IFixture Fixture { get; private set; }

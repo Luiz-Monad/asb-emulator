@@ -1,6 +1,5 @@
 ﻿using AutoFixture;
 using Azure.Messaging.ServiceBus;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 
 namespace ServiceBusEmulator.IntegrationTests
 {

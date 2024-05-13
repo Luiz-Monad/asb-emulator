@@ -9,15 +9,27 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Include="..\..\src\Example.NoProxyApp\Patches\AmqpTransportInitiatorPatch.cs" Link="Patches\AmqpTransportInitiatorPatch.cs" />
+	  <Compile Include="..\..\src\Example.NoProxyApp\PatchSetup.cs" Link="Patches\PatchSetup.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\server-cert\testca\cacert.cer" Link="cacert.cer">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="AutoFixture" Version="4.17.0" />
 		<PackageReference Include="Azure.Messaging.ServiceBus" Version="7.12.0" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+		<PackageReference Include="Lib.Harmony.Thin" Version="2.3.3" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
 		<PackageReference Include="xunit" Version="2.4.2" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="coverlet.collector" Version="3.1.2">
+		<PackageReference Include="coverlet.collector" Version="3.2.0">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
